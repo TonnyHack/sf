@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Sum values using jQuery</title>
+<meta charset="UTF-8">
+<!--
+	© 2019 @mrgsux - https://github.com/mrgsux
+	The values are using commas instead of points, for the sum they are replaced in vice versa.
+-->
+</head>
+
+<body>
+
+<table>
+	<thead>
+		<tr>
+			<th>Order</th>
+			<th>Quantity</th>
+			<th>Company</th>
+			<th>Order</th>
+			<th>Year</th>
+			<th>Quantity</th>
+			<th>User</th>
+			<th>Date</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>000155</td>
+			<td class="sumCol1">,1</td>
+			<td>001292</td>
+			<td>002</td>
+			<td>2018</td>
+			<td class="sumCol5">,2</td>
+			<td>000313</td>
+			<td>2018/01/16</td>
+		</tr>
+		<tr>
+			<td>000155</td>
+			<td class="sumCol1">1</td>
+			<td>001292</td>
+			<td>002</td>
+			<td>2018</td>
+			<td class="sumCol5">2</td>
+			<td>000313</td>
+			<td>2018/01/16</td>
+		</tr>
+		<tr>
+			<td>000155</td>
+			<td class="sumCol1">4,2</td>
+			<td>001292</td>
+			<td>002</td>
+			<td>2018</td>
+			<td class="sumCol5">6,2</td>
+			<td>000313</td>
+			<td>2018/01/16</td>
+		</tr>
+		<tr>
+			<td>TOTAL</td>
+			<td id="col1"></td>
+			<td></td>
+			<td></td>
+			<td>TOTAL</td>
+			<td id="col5"></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+function sumFromHTML(tag) {
+	var sum = 0;
+	$(tag).each(function() {
+		var value = $(this).text();
+		var values = value.replace(/,/g, '.');
+
+		if (!isNaN(values) && values.length != 0) {
+			sum += parseFloat(values);
+		}
+	});
+	return sum.toFixed(2).replace('.', ',');
+}
+
+document.getElementById('col1').innerHTML = sumFromHTML('.sumCol1');
+document.getElementById('col5').innerHTML = sumFromHTML('.sumCol5');
+</script>
+</body>
+</html>
